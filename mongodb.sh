@@ -29,20 +29,20 @@ N="\e[0m"
                 echo "you are root  user"
 fi
 
-cp mongo.repo /etc/yum.repos.d/mongo.repo 
+cp mongo.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
 
 VALIDATE $? "cpoied monogDB repo"
 
-dnf install mongodb-org -y 
+dnf install mongodb-org -y &>> $LOGFILE
 VALIDATE $? "DNF monogDB "
 
-systemctl enable mongod
+systemctl enable mongod &>> $LOGFILE
 VALIDATE $? "ENABLE monogDB "
 
-systemctl start mongod 
+systemctl start mongod &>> $LOGFILE
 VALIDATE $? "START monogDB "
 
-sed -i '/127.0.0.1/0.0.0.0/g' /etc/mongod.conf 
+sed -i '/127.0.0.1/0.0.0.0/g' /etc/mongod.conf &>> $LOGFILE
 VALIDATE $? "Remote access monogDB "
 
 systemctl restart mongod &>> $LOGFILE
