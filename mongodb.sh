@@ -28,6 +28,22 @@ N="\e[0m"
             else
                 echo "you are root  user"
 fi
+
 cp mongo.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
 
 VALIDATE $? "cpoied monogDB repo"
+
+dnf install mongodb-org -y &>> $LOGFILE
+VALIDATE $? "DNF monogDB "
+
+systemctl enable mongod &>> $LOGFILE
+VALIDATE $? "ENABLE monogDB "
+
+systemctl start mongod &>> $LOGFILE
+VALIDATE $? "START monogDB "
+
+sed -i '/127.0.0.1/0.0.0.0/g' /etc/mongod.conf &>> $LOGFILE
+VALIDATE $? "Remote access to monogDB "
+
+systemctl restart mongod &>> $LOGFILE
+VALIDATE $? "systemctl restring the monogDB "
