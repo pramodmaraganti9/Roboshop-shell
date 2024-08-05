@@ -17,7 +17,7 @@ N="\e[0m"
     then 
     echo -e "$2 ..... $R failed $N"
     else
-    echo -e "$2 ......$G sucess $N"
+    echo -e "$2 ......$G success $N"
     fi
  } 
 
@@ -43,7 +43,6 @@ systemctl start mongod &>> $LOGFILE
 VALIDATE $? "START monogDB "
 
 sed -i '/127.0.0.1/0.0.0.0/g' /etc/mongod.conf &>> $LOGFILE
-VALIDATE $? "Remote access to monogDB "
-
+VALIDATE $? "Remote access monogDB "
 systemctl restart mongod &>> $LOGFILE
 VALIDATE $? "systemctl restring the monogDB "
