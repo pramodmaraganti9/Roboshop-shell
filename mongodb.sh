@@ -8,7 +8,7 @@ Y="\e[33m"
 N="\e[0m"
 
  TIMESTAMP=$(date +%F-%H-%M-%S)
- LOGFILE="/temp/$0-$TIMESTAMP.log"
+ LOGFILE="/tmp/$0-$TIMESTAMP.log"
 
  echo "script started executing at $TIMESTAMP" &>> $LOGFILE
 
@@ -29,14 +29,14 @@ N="\e[0m"
                 echo "you are root  user"
 fi
 
-cp mongo.repo /etc/yum.repos.d/mongo.repo 
+cp mongo.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
 
 VALIDATE $? "cpoied monogDB repo"
 
-dnf install mongodb-org -y 
+dnf install mongodb-org -y &>> $LOGFILE
 VALIDATE $? "DNF monogDB "
 
-systemctl enable mongod 
+systemctl enable mongod &>> $LOGFILE
 VALIDATE $? "ENABLE monogDB "
 
 systemctl start mongod &>> $LOGFILE
