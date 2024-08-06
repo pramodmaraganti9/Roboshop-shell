@@ -56,7 +56,7 @@ VALIDATE $? "/tmp/catalogue.zip   "
 cd /app  &>> $LOGFILE
 VALIDATE $? "/tmp/catalogue.zip   "
 
-unzip -0 /tmp/catalogue.zip &>> $LOGFILE
+unzip -o /tmp/catalogue.zip &>> $LOGFILE
 VALIDATE $? "/tmp/catalogue.zip  unzip "
 
 npm install  &>> $LOGFILE
