@@ -29,14 +29,14 @@ N="\e[0m"
                 echo "you are root  user"
 fi
 
-cp mongo.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
+cp mongo.repo /etc/yum.repos.d/mongo.repo 
 
 VALIDATE $? "cpoied monogDB repo"
 
-dnf install mongodb-org -y &>> $LOGFILE
+dnf install mongodb-org -y 
 VALIDATE $? "DNF monogDB "
 
-systemctl enable mongod &>> $LOGFILE
+systemctl enable mongod 
 VALIDATE $? "ENABLE monogDB "
 
 systemctl start mongod &>> $LOGFILE
